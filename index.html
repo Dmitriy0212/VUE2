@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>VUE-практика</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+        <style>
+            html {
+                background-image: url(https://mobimg.b-cdn.net/v3/fetch/70/703e3aefd9500eff0f63294bc383ac2a.jpeg?w=1000&r=0.5625);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-attachment: fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+            a{
+                color: aqua;
+                font-size: 12px;
+            }
+            p{
+                color:#00ffe7;
+            }
+            .atuin-btn {
+                text-decoration: none;
+                position: relative;
+                color: #FFF;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-family: 'Roboto Condensed', Тahoma, sans-serif;
+                background: #ff0000;
+                cursor: pointer;
+                border: 2px solid #BFE2FF;
+                outline: 1px solid;
+                outline-color: #337AB7;
+                outline-offset: 0px;
+                text-shadow: none;
+                transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+                border-radius: 3px;
+            }
+            .atuin-btn:hover,
+            .atuin-btn:active,
+            .atuin-btn:focus {
+                box-shadow: inset 0 0 20px #BFE2FF;
+                outline-color: rgba(255, 255, 255, 0);
+                outline-offset: 15px;
+                color: #FFF;
+            }
+            .atuinBtnLoad {
+                display: inline-flex;
+                margin: 5px;
+                text-decoration: none;
+                position: relative;
+                font-size: 10px;
+                line-height: 10px;
+                padding: 6px 10px;
+                color: #FFF;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-family: 'Roboto Condensed', Тahoma, sans-serif;
+                background: #337AB7;
+                cursor: pointer;
+                border: 2px solid #BFE2FF;
+                overflow: hidden;
+                z-index: 1;
+                border-radius: 5px;
+            }
+            .atuinBtnLoad:hover,
+            .atuinBtnLoad:active,
+            .atuinBtnLoad:focus {
+                color: #FFF;
+            }
+            .atuinBtnLoad:before,
+            .atuinBtnLoad:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                width: 20px;
+                height: 100%;
+                background-color: #1C4B73;
+                z-index: -1;
+            }
+            .atuinBtnLoad:before {
+                left: -20px;
+                transform: translate(-50%, -50%);
+            }
+            .atuinBtnLoad:after {
+                right: -20px;
+                transform: translate(50%, -50%);
+            }
+            .atuinBtnLoad:hover:before,
+            .atuinBtnLoad:active:before,
+            .atuinBtnLoad:focus:before {
+                animation: from-left 0.5s both;
+            }
+            .atuinBtnLoad:hover:after,
+            .atuinBtnLoad:active:after,
+            .atuinBtnLoad:focus:after {
+                animation: from-right 0.5s both;
+            }
+            @keyframes from-right {
+                0% {
+                    right: -20px;
+                }
+                50% {
+                    right: 50%;
+                    width: 20px;
+                }
+                100% {
+                    right: 50%;
+                    width: 100%;
+                }
+            }
+            @keyframes from-left {
+                0% {
+                    left: -20px;
+                }
+                50% {
+                    left: 50%;
+                    width: 20px;
+                }
+                100% {
+                    left: 50%;
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app1" v-bind:style="{
+            backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            display: 'block',
+            height: 'fit-content',
+            width: app1Width,
+            border:'2px solid #f70000',
+            borderRadius:'10px',
+            backgroundColor: 'black',
+            padding: '5px',
+            textAlign: 'center',
+            margin:'20px',
+            }">
+            <div v-bind:style="{
+                display:'block',
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                textAlign: 'center',
+                height:'fit-content',
+                margin:'10px',
+                color: '#0072ff',
+                borderTopLeftRadius: '10px',
+                borderTopRightRadius: '10px',
+                borderBottomRightRadius: borderBottomRadius,
+                borderBottomLeftRadius: borderBottomRadius,
+                border:'2px solid #f70000', 
+                justifyContent: 'flex-start',
+                flexDirection: 'column',   
+                }">
+                <div>
+                    <h5 v-bind:style="{
+                        width:'180px',
+                        display:'block',
+                        margin:'auto',
+                        color: '#0072ff',
+                        textAlign: 'center',
+                        }" v-html="thisManthInSpisok+thisManthInSpisok1+thisManthInSpisok2">
+                    </h5>
+                    <input v-on:keyup.enter="toDo1(), setTimeout(() =>{skritSpisokPoly()}, 50)"
+                    v-bind:style="{margin:'5px',borderRadius: '7px',textAlign: 'center'}"
+                    v-model="text2" placeholder="Запланировать" >
+                </div>
+            </div>
+            <div id="pole" v-bind:style="{
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
+                backgroundAttachment: 'fixed',
+                backgroundSize: 'cover',
+                display:displayVisible1,
+                border:'2px solid #f70000',
+                borderRadius:'0px 0px 10px 10px',
+                backgroundColor: 'white',
+                padding: '5px',
+                textAlign: 'center',
+                overflow: 'auto',
+                marginTop: '-12px',
+                marginLeft: '10px',
+                marginRight: '10px',
+                marginBottom: '10px'}">
+                <p v-for="(masP, indexP) in masDeyTasks" @dblclick="toDo4(masP, indexP)" v-bind:style="{backgroundColor:masBackgroundColorP[indexP]}">
+                    <input type="checkbox" v-model="masInputCheckbox[indexP]" v-bind:style="{display:masDisplayInputCheckbox[indexP]}"
+                     v-on:click="toDo3(indexP)">
+                     {{masP}}
+                     <button class="atuin-btn" v-on:click="toDo2(indexP), setTimeout(() =>{skritSpisokPoly()}, 50)">[X]</button>
+                     <br>
+                     <span v-bind:style="{
+                        display: 'inline',
+                        margin:'5px',
+                        fontSize: '12px',
+                        color: '#0072ff',}">Двойной клик для редактирование
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div id="app2" v-bind:style="{
+            backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            display: 'flex',
+            height: app2Height,
+            width: app2Width,
+            border:'2px solid #f70000',
+            borderRadius:'10px',
+            backgroundColor: 'black',
+            padding: '5px',
+            textAlign: 'center',
+            margin:'20px',
+        }">
+            <div v-bind:style="{
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
+                backgroundAttachment: 'fixed',
+                backgroundSize: 'cover',
+                display:'block',
+                width: 'fit-content',
+                border:'2px solid #f70000',
+                borderRadius:'10px',
+                backgroundColor: 'white',
+                padding: '5px',
+                textAlign: 'center',
+                margin:'10px 10px',}">
+                <input v-bind:style="{display:'block',margin:'5px',borderRadius: '7px',textAlign: 'center',marginLeft:'13px',marginRight:'13px'}"v-model="thisManth" placeholder="Порядковый номер месяца">
+                <input v-bind:style="{display:'block',margin:'5px',borderRadius: '7px',textAlign: 'center',marginLeft:'13px',marginRight:'13px'}"v-model="thisYar" placeholder="Год">
+                <button class="atuinBtnLoad" v-on:click="caledDo(thisManth,thisYar)">Сформировать календарь</button>
+                <h5 v-bind:style="{width:'180px',display:displayVisible3,margin:'5px',color: '#0072ff',marginLeft:'13px',marginRight:'13px'}">Выбери календарный день для планировки</h5>
+                <table v-bind:style="{display:displayVisible3,textAlign: 'center',border: '1px solid black',width:'200px',height:'fit-content',margin:'3px',}">
+                    <tr v-html="thisManthInSpisokMonth" v-bind:style="{color: '#0072ff',}"></tr>
+                    <th v-for="deyWeak in masWeak" 
+                    v-bind:style="{
+                        borderRadius: '4px',
+                        margin:'3px',
+                        fontWeight: 'bold',
+                        backgroundColor: '#E6E6E6',
+                        display: 'inline-block',
+                        width:'21px',height:'21px',
+                        fontSize:'90%',
+                        boxSizing: 'border-box'}">
+                        {{deyWeak}}
+                    </th>
+                    <tr v-bind:style="{}">
+                        <td class="atuin-btn" v-on:click="isIniProd(str),setTimeout(() =>{toDo7()}, 20)" v-for="(str, index) in masDeyData" 
+                            v-bind:style="{
+                                textAlign: 'center',
+                                borderRadius: '4px',
+                                backgroundColor: '#29dfc6',
+                                display: 'inline-block',
+                                margin:'4px',
+                                border: '1px solid black',
+                                width:'15px',
+                                height:'15px',
+                                fontSize:'90%'}">
+                                {{str}}
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <button class="atuinBtnLoad" v-on:click="toDo9(thisManth,thisYar)" v-bind:style="{display:displayVisible6}">Отобразить список годов</button>
+            </div>
+            <div v-bind:style="{
+                display:displayVisible4,
+                textAlign: 'center',
+                margin:'10px 10px',
+                justifyContent: 'flex-start',
+                flexDirection: 'column',}">
+                <div v-bind:style="{
+                    display:displayVisible1,
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    textAlign: 'center',
+                    height:'fit-content',
+                    margin:'fit-content',
+                    color: '#0072ff',
+                    borderTopLeftRadius: '10px',
+                    borderTopRightRadius: '10px',
+                    borderBottomRightRadius: borderBottomRadius,
+                    borderBottomLeftRadius: borderBottomRadius,
+                    border:'2px solid #f70000',}">
+                    <div v-bind:style="{
+                        display:displayVisible1,
+                        height:'25px',
+                        backgroundColor: '#0072ff',
+                        borderRadius:'5px 5px 0px 0px',
+                        marginTop: '-4px',
+                        marginLeft: '-2.5px',
+                        marginRight: '-2.5px',
+                        padding: '2px',}">
+                        <button class="atuin-btn" 
+                        v-bind:style="{
+                            display:displayVisible1,
+                            margin:'2px 2px 2px 185px',
+                            backgroundColor:'red',
+                            borderRadius:'3px',}" v-on:click="skritPole()">
+                            [X]
+                        </button>
+                    </div>
+                    <h5 v-bind:style="{
+                        width:'180px',
+                        display:displayVisible1,
+                        margin:'auto',
+                        color: '#0072ff',
+                        textAlign: 'center',}" v-html="thisManthInSpisok+thisManthInSpisok1+thisManthInSpisok2 + thisManthInSpisokMonth">
+                    </h5>
+                    <input v-on:keyup.enter="toDo5(), setTimeout(() =>{toDo6()}, 300)"
+                    v-bind:style="{
+                        margin:'5px',borderRadius: '7px',textAlign: 'center'}" v-model="text2" placeholder="Запланировать" >
+                    <h5 v-bind:style="{
+                        display:displayVisible2,
+                        margin:'5px'}">
+                        Поле корректировки
+                    </h5>
+                    <input v-on:keyup.enter="toDo1()" v-bind:style="{
+                        display:displayVisible2,
+                        margin: 'auto',
+                        marginBottom: '10px',
+                        borderRadius: '7px',textAlign: 'center'}" v-model="text1" placeholder="Здесть менять">
+                </div>
+                <div id="poleapp2" v-bind:style="{
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center center',
+                    backgroundAttachment: 'fixed',
+                    backgroundSize: 'cover',
+                    display:displayVisible5,
+                    border:'2px solid #f70000',
+                    borderRadius:'0px 0px 10px 10px',
+                    backgroundColor: 'white',
+                    padding: '5px',
+                    textAlign: 'center',
+                    overflow: 'auto',
+                    marginTop: '-5px',}">
+                    <p v-for="(masP, indexP) in masDeyTasks" @dblclick="toDo4(masP, indexP)" v-bind:style="{color: '#0072ff',}">
+                        <input v-on:click="toDo3(indexP), setTimeout(() =>{skritPole1()}, 100)" type="checkbox">
+                        {{masP}}
+                        <button class="atuin-btn" v-on:click="toDo2(indexP), setTimeout(() =>{toDo7()}, 100), setTimeout(() =>{skritPole1()}, 100)">
+                            [X]
+                        </button>
+                        <br>
+                        <span 
+                        v-bind:style="{
+                            display: 'inline',
+                            margin:'5px',
+                            fontSize: '12px',
+                            color: '#0072ff',}">
+                            Двойной клик для редактирование
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div id="poleYearapp2" v-bind:style="{
+                display:displayVisible7,
+                textAlign: 'center',
+                margin:'10px 10px',
+                justifyContent: 'flex-start',
+                flexDirection: 'column',
+                width: '225px',}">
+                <div v-bind:style="{
+                    display:'block',
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    textAlign: 'center',
+                    height:'fit-content',
+                    margin:'fit-content',
+                    color: '#0072ff',
+                    borderTopLeftRadius: '10px',
+                    borderTopRightRadius: '10px',
+                    borderBottomRightRadius: '0px',
+                    borderBottomLeftRadius: '0px',
+                    border:'2px solid #f70000',}">
+                    <div v-bind:style="{
+                        display:'block',
+                        height:'25px',
+                        backgroundColor: '#0072ff',
+                        borderRadius:'5px 5px 0px 0px',
+                        marginTop: '-4px',
+                        marginLeft: '-2.5px',
+                        marginRight: '-2.5px',
+                        padding: '2px',}">
+                        <button class="atuin-btn" 
+                        v-bind:style="{
+                            display:'block',
+                            margin:'2px 2px 2px 185px',
+                            backgroundColor:'red',
+                            borderRadius:'3px',}" v-on:click="toDo14()">
+                            [X]
+                        </button>
+                    </div>
+                    <input v-on:keyup.enter="toDo13(), setTimeout(() =>{toDo9()}, 50)"
+                    v-bind:style="{
+                        margin:'5px',borderRadius: '7px',textAlign: 'center'}" v-model="text3" placeholder="Добавить год" >
+                    <h5 v-bind:style="{
+                        display:displayVisible8,
+                        margin:'5px'}">
+                        Поле корректировки
+                    </h5>
+                    <input v-on:keyup.enter="toDo12(), setTimeout(() =>{toDo9()}, 50)" v-bind:style="{
+                        display:displayVisible8,
+                        margin: 'auto',
+                        marginBottom: '10px',
+                        borderRadius: '7px',textAlign: 'center'}" v-model="text4" placeholder="Здесть менять">
+                </div>
+                <div id="poleYearapp2Spisok" v-bind:style="{
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center center',
+                    backgroundAttachment: 'fixed',
+                    backgroundSize: 'cover',
+                    display:'block',
+                    border:'2px solid #f70000',
+                    borderRadius:'0px 0px 10px 10px',
+                    backgroundColor: 'white',
+                    padding: '5px',
+                    textAlign: 'center',
+                    overflow: 'auto',
+                    marginTop: '-5px',}">
+                    <h5 v-bind:style="{
+                        width:'180px',
+                        display:'block',
+                        margin:'auto',
+                        color: '#0072ff',
+                        textAlign: 'center', }" v-html="spisokYear"></h5>
+                    <p v-for="(masP, indexP) in masYear" @dblclick="toDo11(masP, indexP)" v-bind:style="{color: '#0072ff',}">
+                        {{masP}}
+                        <button class="atuin-btn" v-on:click="toDo10(indexP), setTimeout(() =>{toDo9()}, 100)">
+                            [X]
+                        </button>
+                        <button class="atuinBtnLoad" v-on:click="toDo15(indexP), setTimeout(() =>{toDo9()}, 100)">Отобразить список месяцов</button>
+                        <br>
+                        <span 
+                        v-bind:style="{
+                            display: 'inline',
+                            margin:'5px',
+                            fontSize: '12px',
+                            color: '#0072ff',}">
+                            Двойной клик для редактирование
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div id="poleMonthapp2" v-bind:style="{
+                display:displayVisible9,
+                textAlign: 'center',
+                margin:'10px 10px',
+                justifyContent: 'flex-start',
+                flexDirection: 'column',}">
+                <div v-bind:style="{
+                    display:'flex',
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    textAlign: 'center',
+                    height:'fit-content',
+                    margin:'fit-content',
+                    color: '#0072ff',
+                    borderTopLeftRadius: '10px',
+                    borderTopRightRadius: '10px',
+                    borderBottomRightRadius: '0px',
+                    borderBottomLeftRadius: '0px',
+                    border:'2px solid #f70000',
+                    flexDirection: 'column'}">
+                    <div v-bind:style="{
+                        display:'inline-block',
+                        height:'25px',
+                        backgroundColor: '#0072ff',
+                        borderRadius:'5px 5px 0px 0px',
+                        marginTop: '-4px',
+                        marginLeft: '-2.5px',
+                        marginRight: '-2.5px',
+                        padding: '2px',
+                        flexDirection: 'column',
+                        textAlign: 'right'}">
+                        <button class="atuin-btn" 
+                        v-bind:style="{
+                            backgroundColor:'red',
+                            borderRadius:'3px',}" v-on:click="toDo20()">
+                            [X]
+                        </button>
+                    </div>
+                    <input v-on:keyup.enter="toDo19(), setTimeout(() =>{toDo15(masYearIndex1)}, 100), setTimeout(() =>{caledDo(monthMas,yearMas)}, 100)"
+                    v-bind:style="{
+                        margin:'5px',borderRadius: '7px',textAlign: 'center'}" v-model="text5" placeholder="Добавить месяц" >
+                    <h5 v-bind:style="{
+                        display:displayVisible10,
+                        margin:'5px'}">
+                        Поле корректировки
+                    </h5>
+                    <input v-on:keyup.enter="toDo18(), setTimeout(() =>{toDo15(masYearIndex1)}, 100)" v-bind:style="{
+                        display:displayVisible10,
+                        margin: 'auto',
+                        marginBottom: '10px',
+                        borderRadius: '7px',textAlign: 'center'}" v-model="text6" placeholder="Здесть менять">
+                </div>
+                <div id="poleMonthapp2Spisok" v-bind:style="{
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center center',
+                    backgroundAttachment: 'fixed',
+                    backgroundSize: 'cover',
+                    display:'block',
+                    border:'2px solid #f70000',
+                    borderRadius:'0px 0px 10px 10px',
+                    backgroundColor: 'white',
+                    padding: '5px',
+                    textAlign: 'center',
+                    overflow: 'auto',
+                    marginTop: '-5px',}">
+                    <h5 v-bind:style="{
+                        width:'180px',
+                        display:'block',
+                        margin:'auto',
+                        color: '#0072ff',
+                        textAlign: 'center', }" v-html="spisokMonth"></h5>
+                    <p v-for="(masP, indexP) in masMonth" @dblclick="toDo17(masP, indexP)" v-bind:style="{color: '#0072ff',}">
+                        {{masP | capitalize}}
+                        <button class="atuin-btn" v-on:click="toDo16(indexP), setTimeout(() =>{toDo15(masYearIndex1)}, 100)">
+                            [X]
+                        </button>
+                        <select v-model="selected" @click="toDo21(masP,indexP)" v-bind:style="{margin:'5px'}" placeholder="Здесть менять">
+                            <option v-for="(valuemasTasksInMonth, indexmasTasksInMonth) in masTasksInMonth" > {{valuemasTasksInMonth}}<p>{{ selected }}</p></option>
+                        </select>
+                        <br>
+                        <span 
+                        v-bind:style="{
+                            display: 'inline',
+                            margin:'5px',
+                            fontSize: '12px',
+                            color: '#0072ff',}">
+                            Двойной клик для редактирование
+                        </span>
+                        <br>
+                        <button class="atuinBtnLoad" v-on:click="toDo22(masP), setTimeout(() =>{caledDo(monthMas,yearMas)}, 100)">Отобразить месяц в календаре</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="app3" v-bind:style="{
+            backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            display: 'flex',
+            height: 'fit-content',
+            width: 'fit-content',
+            border:'2px solid #f70000',
+            borderRadius:'10px',
+            backgroundColor: 'black',
+            padding: '5px',
+            textAlign: 'center',
+            margin:'20px',
+            flexDirection: 'column',
+            }">
+            <button class="atuinBtnLoad" v-bind:style="{display:'block',textAlign: 'center',width:'225px'}" v-on:click="oupeClose()">{{isValid ? 'Открыть блокнот' : 'Закрыть блокнот'}}</button>
+            <div v-bind:style="{
+                display:displayPole,
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                textAlign: 'center',
+                height:'415px',
+                width: '215px',
+                margin:'10px',
+                color: '#0072ff',
+                border:'2px solid #f70000', 
+                justifyContent: 'flex-start',
+                flexDirection: 'column', 
+                overflow: 'auto',
+                borderRadius:'10px',}">
+                {{zugolovo}}
+                <a v-for="(arr, index) in mas1" @click.prevent="messageToTextarea(index)" href="">{{mas1[index]}}
+                    <button class="atuin-btn" v-on:click="deleteMessage(index), setTimeout(() =>{reLoad()}, 50)">[X]</button>
+                </a>
+            </div>
+            <div id="textareaBlock" v-bind:style="{
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center',
+                backgroundAttachment: 'fixed',
+                backgroundSize: 'cover',
+                display:displayTextarea,
+                border:'2px solid #f70000',
+                borderRadius:'10px',
+                backgroundColor: 'white',
+                padding: '5px',
+                textAlign: 'center',
+                position: 'absolute',
+                marginTop: '-7px',
+                marginLeft: '300px',
+                height:'473px',
+                width:'600px',}">
+                <div id="siveResive" v-bind:style="{
+                    backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center center',
+                    backgroundAttachment: 'fixed',
+                    backgroundSize: 'cover',
+                    display:displayReSeive,
+                    border:'2px solid #f70000',
+                    borderRadius:'10px',
+                    backgroundColor: 'white',
+                    padding: '5px',
+                    textAlign: 'center',
+                    position: 'absolute',
+                    marginTop: '150px',
+                    marginLeft: '150px',
+                    height:'100px',
+                    width: '300px',
+                    color:'white'
+                }"><p v-bind:style="{color: 'grey'}">{{divReSeiveText}}</p>
+                <button class="atuinBtnLoad" v-on:click="seive(message)">Sive as nue</button>
+                <button class="atuinBtnLoad" v-on:click="reseive(message)">Reseive</button>
+            </div>
+                <textarea v-model="message" v-bind:style="{
+                    textAlign: 'left',
+                    marginTop:'20px',
+                    height:'400px',
+                    width: '560px',
+                    borderRadius:'10px',}" placeholder="Введите текст заметки"></textarea>
+                <br>
+                <button v-if="buttonSeive == true" class="atuinBtnLoad" v-on:click="seiveMessage(message)">Сохранить заметку</button>
+                <button v-if="buttonReSeive == true" class="atuinBtnLoad" v-on:click="reSeiveMessage(message)">Сохранить заметку</button>
+            </div>
+        </div>
+
+        <div id="app4" v-bind:style="{
+            backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            display: 'flex',
+            height: 'fit-content',
+            width: 'fit-content',
+            border:'2px solid #f70000',
+            borderRadius:'10px',
+            backgroundColor: 'black',
+            padding: '5px',
+            textAlign: 'center',
+            margin:'20px',
+            flexDirection: 'column',
+            }">
+            <button class="atuinBtnLoad" v-bind:style="{display:'block',textAlign: 'center',width:'225px'}" v-on:click="oupeClose()">
+                {{isValid ? 'Открыть тест' : 'Закрыть тест'}}
+            </button>
+            <div v-bind:style="{
+                display:displayPole,
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                textAlign: 'center',
+                height:'fit-content',
+                width: '200px',
+                margin:'10px',
+                color: '#0072ff',
+                border:'2px solid #f70000', 
+                justifyContent: 'flex-start',
+                flexDirection: 'column',
+                borderRadius:'10px', 
+                overflow: 'auto',  
+                }">
+                <p v-for="(arr, index) in mas">{{arr.question}}
+                    <br>
+                    <span v-bind:style="{
+                        display: masdisplaySpan[index],
+                        margin:'5px',
+                        fontSize: '12px',
+                        color: masBorderColorInput[index],}">{{masSpan[index]}}
+                    </span>
+                    <input v-bind:disabled="masDisabled[index]" v-on:keyup.enter="addAnswer(index)"
+                    v-bind:style="{margin:'5px',borderRadius: '7px',textAlign: 'center', border:'3px solid',borderColor:masBorderColorInput[index]}"
+                    v-model="mas1[index]" placeholder="Ответ" >
+                </p>
+            </div>
+        </div>
+
+        <div id="app5" v-bind:style="{
+            backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            display: 'flex',
+            height: 'fit-content',
+            width: 'fit-content',
+            border:'2px solid #f70000',
+            borderRadius:'10px',
+            backgroundColor: 'black',
+            padding: '5px',
+            textAlign: 'center',
+            margin:'20px',
+            flexDirection: 'column',
+            alignItems: 'center',
+            }">
+            <button class="atuinBtnLoad" v-bind:style="{display:'block',textAlign: 'center',width:'225px'}" v-on:click="oupeClose()">
+                {{isValid ? 'Открыть тест' : 'Закрыть тест'}}
+            </button>
+            <div v-bind:style="{
+                display:displayPole,
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                textAlign: 'center',
+                height:'fit-content',
+                width: '225px',
+                color: '#0072ff',
+                border:'2px solid #f70000', 
+                justifyContent: 'flex-start',
+                flexDirection: 'column',
+                borderRadius:'10px', 
+                overflow: 'auto',  
+                }">
+                <p v-for="(arr, index) in mas" v-bind:style="{display: 'block', margin:'5px', fontSize: '20px', color:masColorP[index],}">
+                    {{arr.question}}
+                    <br>
+                    <input v-on:click="addAnswer(valueA,indexA,index,arr)" 
+                    v-for="(valueA, indexA) in masRadio[index]" name="radio" type="radio" v-model="type" v-bind:value="arr.question+' '+valueA">
+                </p>
+                <p v-bind:style="{display: 'block', margin:'3px', fontSize: '15px',color:masColorP[indexTrues]}" v-for="(valueTrues, indexTrues) in masRadioTrues">{{valueTrues}}</p>
+            </div>
+        </div>
+
+        <div id="app6" v-bind:style="{
+            backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover',
+            display: 'flex',
+            height: 'fit-content',
+            width: 'fit-content',
+            border:'2px solid #f70000',
+            borderRadius:'10px',
+            backgroundColor: 'black',
+            padding: '5px',
+            textAlign: 'center',
+            margin:'20px',
+            flexDirection: 'column',
+            alignItems: 'center',
+            }">
+            <button class="atuinBtnLoad" v-bind:style="{display:'block',textAlign: 'center',width:'225px'}" v-on:click="oupeClose()">
+                {{isValid ? 'Открыть тест' : 'Закрыть тест'}}
+            </button>
+            <div v-if="div1Visible == true" v-bind:style="{
+                display:displayPole,
+                backgroundImage: 'url(https://mobimg.b-cdn.net/v3/fetch/99/99b1f94e983b079412fd1c56fff58e75.jpeg?w=1000&r=0.5625)',
+                textAlign: 'center',
+                height:'fit-content',
+                width: 'fit-content',
+                margin:'10px',
+                color: '#0072ff',
+                border:'2px solid #f70000', 
+                justifyContent: 'flex-start',
+                flexDirection: 'column',
+                borderRadius:'10px', 
+                overflow: 'auto',  
+                }">
+                <div v-if="div1Visible == true" v-bind:style="{display: 'block', margin:'5px'}">
+                    <div v-bind:style="{display: 'block', margin:'5px', fontSize: '20px',}">
+                        {{masAllTasks[index].question}}
+                    </div>
+                    <div v-bind:style="{display: 'flex',}">
+                        
+                        <div v-for="(valueA, indexA) in masAllTasks[index].answers" 
+                        v-bind:style="{display:masAllTasks[index].masDisplayInputCheckbox[indexA],flexDirection: 'row',alignItems: 'center', margin:'8px'}">
+                            <input type="checkbox" v-model="masAllTasks[index].masInputCheckbox[indexA]" v-on:click="addAnswer(valueA)">
+                            {{valueA}}
+                        </div>
+                        
+                    </div>
+                    <div v-bind:style="{display: 'flex',justifyContent: 'center'}">
+                        <div v-bind:style="{display:buttonDisplay,textAlign: 'center'}">
+                            <button class="atuinBtnLoad" v-on:click="preventTasksToDo()">{{preventTasks}}</button>
+                        </div>
+                            <div v-bind:style="{display:'inline-flex',textAlign: 'center'}">
+                                <button v-if="buttonNextTasks == true" class="atuinBtnLoad" v-on:click="nextTasksToDo()">{{nextTasks}}</button>
+                                <button v-if="buttonResalt == true" class="atuinBtnLoad" v-on:click="seeResult()">{{resalt}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="div2Visible == true" v-for="(value, index) in masResult" v-bind:style="{display: 'block', margin:'5px'}">
+                    <p v-bind:style="{color:masColorResult[index]}">{{value}}</p>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+    <script>
+    let app1 = new Vue({
+        el: '#app1',
+        data: {
+            app1Width:'235px',
+            borderBottomRadius:'10px',
+            inputCorectNameMas:'',
+            inputCorectIdMas:'',
+            displayVisible1:'none',
+            text1:'',
+            text2:'',
+            thisManthInSpisok:'Список дел на ',
+            thisManthInSpisok1:'1',
+            thisManthInSpisok2:' число ',
+            masAllTasks:[{arg:'',masTasks:[],masDisplayInputCheckbox:[],masBackgroundColorP:[],masInputCheckbox:[]}],
+            masDeyTasks:[],
+            masDisplayInputCheckbox:[],
+            masBackgroundColorP:[],
+            masInputCheckbox:[],
+        },
+        methods:{
+
+            toDo1: function() {
+                this.displayVisible1='block';
+                this.app1Width='235px';
+                for (let i = 0; i < this.masAllTasks.length; i++) {
+                    this.masAllTasks[i].arg='1';
+                    if(this.text2==''){
+                        alert('Пустая строка не может быть добавлена')
+                        return
+                    }
+                    else{
+                        if(this.thisManthInSpisok1 == this.masAllTasks[i].arg){
+                            this.masAllTasks[i].masTasks.push(this.text2);
+                            this.masAllTasks[i].masDisplayInputCheckbox.push('inline');
+                            this.masAllTasks[i].masBackgroundColorP.push('');
+                            this.masAllTasks[i].masInputCheckbox.push(false);
+                            this.masDisplayInputCheckbox=this.masAllTasks[i].masDisplayInputCheckbox;
+                            this.masBackgroundColorP=this.masAllTasks[i].masBackgroundColorP;
+                            this.masInputCheckbox=this.masAllTasks[i].masInputCheckbox;
+                            this.masDeyTasks=this.masAllTasks[i].masTasks;
+                            this.text2='';
+                            return this.masAllTasks, this.masDisplayInputCheckbox,this.masBackgroundColorP;
+                        }
+                    }
+                }
+            },            
+
+            toDo2: function(index) {
+                for (let k = 0; k < this.masAllTasks.length; ) {
+                    let thisTru;
+                    if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                        thisTru=k;
+                        for(let r = 0;r<this.masAllTasks[thisTru].masTasks.length;){
+                            this.masAllTasks[thisTru].masTasks.splice(index, 1);
+                            this.masAllTasks[thisTru].masDisplayInputCheckbox.splice(index, 1);
+                            this.masAllTasks[thisTru].masBackgroundColorP.splice(index, 1);
+                            this.masAllTasks[thisTru].masInputCheckbox.splice(index, 1);
+                            this.masDisplayInputCheckbox=this.masAllTasks[thisTru].masDisplayInputCheckbox;
+                            this.masBackgroundColorP=this.masAllTasks[thisTru].masBackgroundColorP;
+                            this.masInputCheckbox=this.masAllTasks[thisTru].masInputCheckbox;
+                            return this.masAllTasks, this.masDisplayInputCheckbox,this.masBackgroundColorP,this.masInputCheckbox;
+                        }
+                    }
+                    k++;
+                }
+                return this.masAllTasks;
+            },
+
+            toDo3: function(index){
+                for (let i = 0; i < this.masAllTasks.length; i++) {
+                    this.masAllTasks[i].arg='1';
+                    if(this.thisManthInSpisok1 == this.masAllTasks[i].arg){
+                        this.masAllTasks[i].masDisplayInputCheckbox.splice(index, 1,'none');
+                        this.masAllTasks[i].masBackgroundColorP.splice(index, 1,'red');
+                        this.masDisplayInputCheckbox=this.masAllTasks[i].masDisplayInputCheckbox;
+                        this.masBackgroundColorP=this.masAllTasks[i].masBackgroundColorP;
+                        return this.masAllTasks;
+                    }
+                }
+            },
+
+            toDo4: function(valueMas,index) {
+                this.inputCorectIdMas=index;
+                let vObg=document.getElementById('pole');
+                let paragrafs=vObg.querySelectorAll('p');
+                for(let i = index;i<paragrafs.length;i++){
+                    let paragraf=paragrafs[i].querySelectorAll('input');
+                    for(let j = 0;j<=0;j++){
+                        if( paragraf[0].checked==true){
+                            return;
+                        }
+                        else{
+                            let input = document.createElement('input');
+                            input.value=valueMas;
+                            input.id='input';
+                            paragrafs[index].appendChild(input);
+                            input.addEventListener('blur', this.toDo5);
+                            return;
+                        }
+                    }
+                }
+            },
+
+            toDo5: function() {
+                for (let i = 0; i <= this.masAllTasks.length; i++) {
+                    if(this.thisManthInSpisok1 == this.masAllTasks[i].arg){
+                        let vObg=document.getElementById('pole');
+                        let paragrafs=vObg.querySelectorAll('p');
+                        for(let k = 0;k<paragrafs.length;k++){
+                            let paragraf=paragrafs[k].querySelectorAll('input');
+                            for(let j = 0;j<=0;j++){
+                                this.masAllTasks[i].masTasks.splice(this.inputCorectIdMas, 1,input.value)
+                                let node = document.getElementById('input');
+                                if (node.parentNode) {
+                                    return node.parentNode.removeChild(node);
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            
+            skritSpisokPoly: function(){
+                for (let k = 0; k < this.masAllTasks.length; k++) {
+                    let thisTru;
+                    if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                        if(this.masAllTasks[k].masTasks.length == 0){
+                            this.displayVisible1='none';
+                            this.borderBottomRadius='10px';
+                            this.app1Width='235px';
+                            return
+                        }
+                        else if(this.masAllTasks[k].masTasks.length > 0){
+                            this.displayVisible1='block';
+                            this.borderBottomRadius='0px';
+                            this.app1Width='235px';
+                            return
+                        }
+                    }
+                }
+            },
+        },
+    });
+
+    let app2 = new Vue({
+    el: '#app2',
+    data: {
+        spisokYear:'Список годов',
+            spisokMonth:'Список месяцев',
+            borderBottomRadius:'10px',
+            app2Width:'fit-content',
+            app2Height:'fit-content',
+            inputCorectName:'',
+            inputCorectId:'',
+            inputCorectNameMas:'',
+            inputCorectIdMas:'',
+            displayVisible1:'none',
+            displayVisible2:'none',
+            displayVisible3:'none',
+            displayVisible4:'none',
+            displayVisible5:'none',
+            displayVisible6:'none',
+            displayVisible7:'none',
+            displayVisible8:'none',
+            displayVisible9:'none',
+            displayVisible10:'none',
+            text1:'',
+            text2:'',
+            text3:'',
+            text4:'',
+            text5:'',
+            text6:'',
+            thisManthIn:'',
+            thisManthInSpisokMonth:'',
+            thisManthInSpisok:'Список дел на ',
+            thisManthInSpisok1:'',
+            thisManthInSpisok2:' число ',
+            rawHtml:'',
+            masWeak:['пн', 'вт', 'ср', 'чт','пт','сб','вс'],
+            thisManth:'',
+            thisYar:'',
+            mon:'',
+            d:'',
+            day:'',
+            masDeyData:[],
+            masManthData:['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            masAllTasks:[],
+            masDeyTasks:[],
+            masObg:{},
+            masAllYear:[],
+            masYear:[],
+            masMonth:[],
+            masTasksInMonth:[],
+            thisYearInSpisok:'',
+            indexYearRegekt:'',
+            masYearIndex:'',
+            masYearIndex1:'',
+            masMonthIndex:'',
+            masMonthIndex1:'',
+            selected: '',
+            yearMas:'',
+            monthMas:'',
+    },
+    filters: {
+                capitalize: function(number) {
+                    if(number===''){
+                        return number
+                    }
+                    else {
+                        let masManthData=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+                    return number= masManthData[number-1]
+                    }
+                },
+            },
+    methods:{
+        caledDo: function(month,year){
+            if(month=='' || month<=0 || month>12 || year==''){
+                alert('Некоректно введенные данные');
+                return;
+            }
+            else{  
+                this.masAllTasks=this.toDo8(month,year);
+                this.displayVisible4='none';
+                this.displayVisible3='block';
+                this.displayVisible6='inline-flex';
+                this.masDeyData=[];
+                this.mon = month - 1;
+                this.d = new Date(year, this.mon);
+
+            for(let j=0;j<this.masManthData.length;j++){
+                if(this.mon==j){
+                    this.thisManthIn=this.masManthData[this.mon]+' '+year+' года';
+                }
+            }
+            
+
+            this.thisManthInSpisokMonth='<tr>'+this.thisManthIn+'</tr>'
+
+            if(this.masDeyData.length<=this.getDay(this.d)){
+                for (let i = 0; i < this.getDay(this.d); i++) {
+                    this.masDeyData.push(this.rawHtml);
+                }
+            }
+
+            while (this.d.getMonth() == this.mon) {
+                this.rawHtml=this.d.getDate();
+                this.masDeyData.push(this.rawHtml);
+                this.d.setDate(this.d.getDate() + 1);
+            }
+            let r;
+            if(this.masDeyData.length==35){
+                        r=35%this.masDeyData.length;
+                        this.app2Height='420px';
+                    }
+                    else if(this.masDeyData.length>35){
+                        r=42%this.masDeyData.length;
+                        this.app2Height='440px';
+                    }
+                    else if(this.masDeyData.length<35){
+                        r=35-this.masDeyData.length;
+                        this.app2Height='420px';
+                    }
+                    
+                    for (let i = 0; i < r; i++) {
+                        this.rawHtml='';
+                        this.masDeyData.push(this.rawHtml);
+                    }
+             return
+        }
+        },
+
+        getDay: function(date){
+            this.day = date.getDay();
+            if (this.day == 0) this.day = 7; // сделать воскресенье (0) последним днем
+            return this.day - 1;
+        },
+
+        isIniProd: function(str){
+                this.displayVisible4='flex';
+                this.displayVisible1='block';
+                this.thisManthInSpisok1=str;
+                this.masObg={arg:str,masTasks:[],masTrueth:[]};
+                let vObg=document.getElementById('app2');
+                let paragrafs=vObg.querySelectorAll('td');
+                for(let i = 0;i<this.masDeyData.length;i++){
+                    paragrafs[i].style= 'text-align: center; border-radius: 4px; background-color: #29dfc6; display: inline-block; margin: 4px; border: 1px solid black; width: 15px; height:15px;font-size:90%';
+                    if(this.masDeyData[i]==str && this.masDeyData[i]!==''){
+                        paragrafs[i].style= 'text-align: center; border-radius: 4px; background-color: red; display: inline-block; margin: 0px; border: 1px solid black; width: 23px; height:23px;font-size:90%';
+                    }
+                    else if(this.masDeyData[i]=='' && str==''){
+                        this.displayVisible1='none';
+                        this.displayVisible4='none';
+                        paragrafs[i].style= 'text-align: center; border-radius: 4px; background-color: #29dfc6; display: inline-block; margin: 4px; border: 1px solid black; width: 15px; height:15px;font-size:90%';
+                    }
+                }
+                
+                for (let k = 0; k <= this.masAllTasks.length; k++) {
+                    let thisTru;
+                    if(this.masAllTasks.length==0){
+                        this.borderBottomRadius='10px';
+                        this.displayVisible5='none';
+                        let mas=this.masAllTasks;
+                        for (let i = 0; i <= mas.length; ) {
+                            this.text2='';
+                            mas.push(this.masObg);
+                            this.masAllTasks=mas;
+                            this.masAllTasks[i].arg=this.thisManthInSpisok1;
+                            for (let i = 0; i <= this.masAllTasks.length; i++) {
+                                if(this.thisManthInSpisok1 == this.masAllTasks[i].arg){
+                                    this.masDeyTasks=this.masAllTasks[i].masTasks;
+                                    return this.masAllTasks;
+                                }
+                            }
+                        }
+                    }
+                    else if(str == this.masAllTasks[k].arg){
+                        this.text2='';
+                        if(this.masAllTasks[k].masTasks.length==0){
+                            this.displayVisible5='none';
+                            this.borderBottomRadius='10px';
+                        }
+                        else if(this.masAllTasks[k].masTasks.length>0){
+                            this.borderBottomRadius='0px';
+                            this.displayVisible5='block';
+                        }
+                        this.masDeyTasks=this.masAllTasks[k].masTasks;
+                        return this.masDeyTasks;
+                    }
+                    else if(this.masAllTasks.length>0){
+                        if(this.masAllTasks[k].masTasks.length==0){
+                            this.displayVisible5='none';
+                            this.borderBottomRadius='10px';
+                        }
+                        else if(this.masAllTasks[k].masTasks.length>0){
+                            this.borderBottomRadius='0px';
+                            this.displayVisible5='block';
+                        }
+
+                        let mas=this.masAllTasks;
+                        while (str != this.masAllTasks[k].arg) {
+                            this.text2='';
+                            if(this.masAllTasks[k].masTasks.length==0){
+                                this.displayVisible5='none';
+                                this.borderBottomRadius='10px';
+                            }
+                            else if(this.masAllTasks[k].masTasks.length>0){
+                                this.borderBottomRadius='0px';
+                                this.displayVisible5='block';
+                            }
+                            
+                            while (str != this.masAllTasks[k].arg) {
+                                k++;
+                                if(this.masAllTasks[k]==undefined){
+                                    this.displayVisible5='none';
+                                    this.borderBottomRadius='10px';
+                                    this.masAllTasks.push(this.masObg);
+                                    this.masDeyTasks=this.masAllTasks[k].masTasks;
+                                    return this.masAllTasks;
+                                }
+                                else if(this.masAllTasks[k].masTasks.length==0){
+                                    this.displayVisible5='none';
+                                    this.borderBottomRadius='10px';
+                                }
+                                else if(this.masAllTasks[k].masTasks.length>0){
+                                    this.borderBottomRadius='0px';
+                                    this.displayVisible5='block';
+                                }
+                            }
+                            
+                            while (str == this.masAllTasks[k].arg) {
+                                if(this.masAllTasks[k].masTasks.length==0){
+                                    this.displayVisible5='none';
+                                    this.borderBottomRadius='10px';
+                                }
+                                else if(this.masAllTasks[k].masTasks.length>0){
+                                    this.borderBottomRadius='0px';
+                                    this.displayVisible5='block';
+                                }
+                                this.text2='';
+                                this.masDeyTasks=this.masAllTasks[k].masTasks;
+                                return this.masAllTasks;
+                            }
+                        }
+                    }
+                }
+            },
+
+        toDo1: function() {
+            for (let i = 0; i <= this.masAllTasks.length; i++) {
+                if(this.thisManthInSpisok1 == this.masAllTasks[i].arg){
+                    this.masAllTasks[i].masTasks.splice(this.inputCorectIdMas, 1,this.text1);
+                    this.masDeyTasks=this.masAllTasks[i].masTasks
+                    this.text1='';
+                    this.displayVisible2='none';
+                    return this.masAllTasks;
+                }
+            }
+
+        },
+
+        toDo2: function(index) {
+            for (let k = 0; k <= this.masAllTasks.length; k++) {
+                let thisTru;
+                if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                    thisTru=k;
+                    let vObg=document.getElementById('poleapp2');
+                    let paragrafs=vObg.querySelectorAll('p');
+                    for(let r = 0;r<this.masAllTasks[thisTru].masTasks.length;){
+                        this.masAllTasks[thisTru].masTasks.splice(index, 1);
+                        this.masAllTasks[thisTru].masTrueth.splice(index, 1);
+                        this.masAllTasks[thisTru].masTasks.length=this.masAllTasks[thisTru].masTasks.length;
+                        this.masDeyTasks=this.masAllTasks[thisTru].masTasks;
+                        let checkedInput=paragrafs[index].querySelectorAll('input');
+                        for(let j = 0;j<1;j++){
+                            checkedInput[0].checked=this.masAllTasks[thisTru].masTrueth[index];
+                            paragrafs[index].style= 'text-decoration: none;';
+                            checkedInput[0].style= 'text-decoration: none';
+                            return this.masAllTasks;
+                        }
+                    }
+                }
+            }
+            return this.masAllTasks;
+        },
+
+        toDo3: function(index) {
+            for (let k = 0; k <= this.masAllTasks.length; k++) {
+                let thisTru;
+                if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                    thisTru=k;
+                    let vObg=document.getElementById('poleapp2');
+                    let paragrafs=vObg.querySelectorAll('p');
+                    for(let r = 0;r<paragrafs.length;){
+                        let checkedInput=paragrafs[index].querySelectorAll('input');
+                        for(let j = 0;j<1;j++){
+                            checkedInput[0].checked=true;
+                            this.masAllTasks[thisTru].masTrueth[index]=checkedInput[0].checked;
+                            paragrafs[index].style= 'background-color:#607d8b;text-decoration: line-through;width: fit-content;';
+                            checkedInput[0].style= 'display:none';
+                            return this.masAllTasks;
+                        }
+                    }
+                }
+            }
+            return this.masAllTasks;
+        },
+
+        toDo4: function(valueMas,index) {
+            let vObg=document.getElementById('app2');
+            let paragrafs=vObg.querySelectorAll('p');
+            for(let i = index;i<paragrafs.length;i++){
+                let paragraf=paragrafs[i].querySelectorAll('input');
+                for(let j = 0;j<=0;j++){
+                    if( paragraf[0].checked==true){
+                        return;
+                    }
+                    else{
+                        this.displayVisible2='block';
+                        this.text1=valueMas;
+                        this.inputCorectIdMas=index;
+                        this.inputCorectNameMas=valueMas;
+                    }
+                }
+            }
+
+        },
+
+        toDo5: function() {
+            this.displayVisible5='block'
+            this.borderBottomRadius='0px'
+            for (let i = 0; i <= this.masAllTasks.length; i++) {
+                if(this.thisManthInSpisok1 == this.masAllTasks[i].arg){
+                    this.masAllTasks[i].masTasks.push(this.text2);
+                    this.masDeyTasks=this.masAllTasks[i].masTasks;
+                    this.text2='';
+                    return this.masAllTasks;
+                }
+            }
+        },
+        
+        toDo6: function() {
+            for (let k = 0; k <= this.masAllTasks.length; k++) {
+                let thisTru;
+                if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                    if(this.masAllTasks[k].masTasks.length==0){
+                        return this.masAllTasks;
+                    }
+                    else if(this.masAllTasks[k].masTasks.length>0){
+                        thisTru=k;
+                        let vObg=document.getElementById('poleapp2');
+                        let paragrafs=vObg.querySelectorAll('p');
+                        if(paragrafs.length==0){
+                            return this.masAllTasks;
+                        }
+                        else if(paragrafs.length>0){
+                            for(let r = 0;r<this.masAllTasks[thisTru].masTasks.length;){
+                                let checkedInput=paragrafs[r].querySelectorAll('input');
+                                for(let j = 0;j<1;j++){
+                                    this.masAllTasks[thisTru].masTrueth[r]=checkedInput[0].checked;
+                                    if(checkedInput[0].checked==false){
+                                        paragrafs[r].style= 'text-decoration: none;';
+                                        checkedInput[0].style= 'text-decoration: none;';
+                                        r++;
+                                    }
+                                    else if(checkedInput[0].checked==true){
+                                        r++;
+                                    }
+                                    else if(checkedInput[0].checked==true){
+                                        paragrafs[r].style= 'background-color:#607d8b;text-decoration: line-through;width: fit-content;';
+                                        checkedInput[0].style= 'display:none';
+                                        return this.masAllTasks;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return this.masAllTasks;
+                }
+            }
+        },
+
+        toDo7: function() {
+            for (let k = 0; k < this.masAllTasks.length; k++) {
+                let thisTru;
+                if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                    if(this.masAllTasks[k].masTasks.length==0){
+                        return this.masAllTasks;
+                    }
+                    else if(this.masAllTasks[k].masTasks.length>0){
+                        thisTru=k;
+                        let vObg=document.getElementById('poleapp2');
+                        let paragrafs=vObg.querySelectorAll('p');
+                        if(paragrafs.length==0){
+                            return this.masAllTasks;
+                        }
+                        else if(paragrafs.length>0){
+                            for(let r = 0;r<this.masAllTasks[thisTru].masTasks.length;){
+                                let checkedInput=paragrafs[r].querySelectorAll('input');
+                                for(let j = 0;j<1;j++){
+                                    checkedInput[0].checked=this.masAllTasks[thisTru].masTrueth[r];
+                                    if(checkedInput[0].checked==false){
+                                        paragrafs[r].style= 'text-decoration: none;';
+                                        checkedInput[0].style= 'text-decoration: none;';
+                                        r++;
+                                    }
+                                    else if(checkedInput[0].checked==true){
+                                        paragrafs[r].style= 'background-color:#607d8b;text-decoration: line-through;width: fit-content;';
+                                        checkedInput[0].style= 'display:none';
+                                        r++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return this.masAllTasks;
+        },
+
+        toDo8: function(month,year){
+                masObg2={thisAllYear:'',thisYearIn:[]};
+                masObg3={thisAllMonth:'',thisMonthIn:[]};
+                if(this.masAllYear.length==0){
+                    this.masAllYear.push(masObg2);
+                    for (let a = 0; a < this.masAllYear.length; a++) {
+                        this.masAllYear[a].thisAllYear=year;
+                        this.masAllYear[a].thisYearIn.push(masObg3);
+                        for (let b = 0; b < this.masAllYear[a].thisYearIn.length; b++) {
+                            this.masAllYear[a].thisYearIn[b].thisAllMonth=month;
+                            return this.masAllYear[a].thisYearIn[b].thisMonthIn;
+                        }
+                    }
+                }
+                else if(this.masAllYear.length>0){
+                    for (let a = 0; a <= this.masAllYear.length;) {
+                        while(this.masAllYear[a]==undefined){
+                            for (let b = 0; b < this.masAllYear.length;) {
+                                while(this.masAllYear[b].thisAllYear==year){
+                                    if(this.masAllYear[b].thisYearIn.length>0){
+                                        for (let d = 0; d <= this.masAllYear[b].thisYearIn.length;) {
+                                            while(this.masAllYear[b].thisYearIn[d]==undefined){
+                                                for (let e = 0; e <= this.masAllYear[b].thisYearIn.length-1;) {
+                                                    while(this.masAllYear[b].thisYearIn[e].thisAllMonth==month){
+                                                        return this.masAllYear[b].thisYearIn[e].thisMonthIn;
+                                                    }
+                                                    e++;
+                                                }
+                                                this.masAllYear[b].thisYearIn.push(masObg3);
+                                                for (let f = 0; f < this.masAllYear[b].thisYearIn.length; f++) {
+                                                    this.masAllYear[b].thisYearIn[d].thisAllMonth=month;
+                                                    return this.masAllYear[b].thisYearIn[d].thisMonthIn;
+                                                }
+                                            }
+                                            d++;
+                                        }
+                                    }
+                                    else if(this.masAllYear[b].thisYearIn.length==0){
+                                        for (let d = 0; d <= this.masAllYear[b].thisYearIn.length;) {
+                                            while(this.masAllYear[b].thisYearIn[d]==undefined){
+                                                for (let e = 0; e <= this.masAllYear[b].thisYearIn.length-1;) {
+                                                    while(this.masAllYear[b].thisYearIn[e].thisAllMonth==month){
+                                                        return this.masAllYear[b].thisYearIn[e].thisMonthIn;
+                                                    }
+                                                    e++;
+                                                }
+                                                this.masAllYear[b].thisYearIn.push(masObg3);
+                                                for (let f = 0; f < this.masAllYear[b].thisYearIn.length; f++) {
+                                                    this.masAllYear[b].thisYearIn[d].thisAllMonth=month;
+                                                    return this.masAllYear[b].thisYearIn[d].thisMonthIn;
+                                                }
+                                            }
+                                            d++;
+                                        }
+                                    }
+                                }
+                                b++;
+                            }
+                            this.masAllYear.push(masObg2);
+                            this.masAllYear[a].thisAllYear=year;
+                            this.masAllYear[a].thisYearIn.push(masObg3);
+                            for (let c = 0; c < this.masAllYear[c].thisYearIn.length; c++) {
+                                this.masAllYear[a].thisYearIn[c].thisAllMonth=month;
+                                return this.masAllYear[a].thisYearIn[c].thisMonthIn;
+                            }
+                        }
+                        a++;
+                    }
+                }
+            },
+
+            toDo9: function(){
+                if(this.masAllYear.length==0){
+                    this.spisokYear='В списке нет годов';
+                    this.displayVisible3='none';
+                    this.displayVisible4='none';
+                    this.displayVisible6='none';
+                    this.app2Height='fit-content';
+                    this.thisManth='';
+                    this.thisYar='';
+                }
+                else if(this.masAllYear.length>0){
+                    this.spisokYear='Список годов'
+                }
+                this.displayVisible7='flex';
+                this.masYear=[];
+                for (let a = 0; a < this.masAllYear.length;a++) {
+                    this.masYear.push(this.masAllYear[a].thisAllYear)
+                }
+                return this.masYear;
+            },
+
+            toDo10: function(index) {
+                this.displayVisible9='none'
+                this.masAllYear.splice(index, 1);
+                return this.masAllYear;
+            },
+
+            toDo11: function(valueMas,index) {
+                this.displayVisible8='block';
+                this.text4=valueMas;
+                this.indexYearRegekt=index;
+                return this.masAllYear;
+            },
+
+            toDo12: function() {
+                this.displayVisible3='none';
+                this.displayVisible4='none';
+                this.displayVisible6='none';
+                this.displayVisible8='none';
+                this.app2Height='fit-content';
+                this.thisManth='';
+                this.thisYar='';
+                for (let a = 0; a <= this.masAllYear.length;a++) {
+                    while(this.masAllYear[a]==undefined){
+                        this.masAllYear[this.indexYearRegekt].thisAllYear=this.text4
+                        this.indexYearRegekt='';
+                        this.text4='';
+                        return this.masAllYear;
+                    }
+
+                    if(this.text4==this.masAllYear[a].thisAllYear){
+                        alert('Такой год уже есть в списке введите  год которого нет в списе')
+                        return this.masAllYear;
+                    }
+                }
+            },
+
+            toDo13: function() {
+                masObg2={thisAllYear:'',thisYearIn:[]};
+                for (let a = 0; a <= this.masAllYear.length;a++) {
+                    while(this.masAllYear[a]==undefined){
+                        this.masAllYear.push(masObg2);
+                        this.masAllYear[a].thisAllYear=this.text3;
+                        return this.masAllYear;
+                    }
+
+                    if(this.text3==this.masAllYear[a].thisAllYear){
+                        alert('Такой год уже есть в списке')
+                        return this.masAllYear;
+                    }
+                }
+            },
+
+            toDo14: function(){
+                this.displayVisible7='none';
+                this.displayVisible9='none';
+            },
+
+            toDo15: function(index){
+                this.spisokMonth='';
+                this.displayVisible9='flex';
+                this.masYearIndex=index;
+                this.masYearIndex1=this.masYearIndex;
+                this.masMonth=[];
+               if(this.masAllYear[this.masYearIndex].thisYearIn.length==0){
+                    this.spisokMonth='В списке нет месяцев';
+                    this.displayVisible4='none';
+                    this.app2Height='fit-content';
+                    this.thisManth='';
+                    this.thisYar='';
+                    this.yearMas=this.masYear[this.masYearIndex]
+                }
+                else if(this.masAllYear[this.masYearIndex].thisYearIn.length>0){
+                    this.spisokMonth='Список месяцев на '+this.masYear[this.masYearIndex]
+                    this.yearMas=this.masYear[this.masYearIndex]
+                }
+                
+                for (let a = 0; a < this.masAllYear[this.masYearIndex].thisYearIn.length;a++) {
+                    this.masMonth.push(this.masAllYear[this.masYearIndex].thisYearIn[a].thisAllMonth)
+                }
+                return this.masAllYear;
+            },
+
+            toDo16: function(index) {
+                this.masMonthIndex=index
+                    this.masAllYear[this.masYearIndex].thisYearIn.splice(index, 1);
+                    this.masAllTasks=[];
+                    this.displayVisible3='none'
+                return this.masAllYear[this.masYearIndex].thisYearIn;
+            },
+
+            toDo17: function(valueMas,index) {
+                this.displayVisible10='block';
+                this.text6=valueMas;
+                this.masMonthIndex1=index;
+                return this.masAllYear;
+            },
+
+            toDo18: function() {
+                if(this.text6=='' || this.text6<=0 || this.text6>12){
+                    alert('Некоректно введенные данные');
+                    return;
+                }
+                this.displayVisible4='none';
+                this.displayVisible6='none';
+                this.displayVisible10='none';
+                this.app2Height='fit-content';
+                this.thisManth='';
+                this.thisYar='';
+                for (let a = 0; a <= this.masAllYear[this.masYearIndex].thisYearIn.length;a++) {
+                    while(this.masAllYear[this.masYearIndex].thisYearIn[a]==undefined){
+                        this.masAllYear[this.masYearIndex].thisYearIn[this.masMonthIndex1].thisAllMonth=this.text6
+                        this.text6='';
+                        return this.masAllYear;
+                    }
+
+                    if(this.text6==this.masAllYear[this.masYearIndex].thisYearIn[a].thisAllMonth){
+                        alert('Такой месяц уже есть в списке введите  месяц которого нет в списе')
+                        return this.masAllYear;
+                    }
+                }
+            },
+
+            toDo19: function() {
+                masObg3={thisAllMonth:'',thisMonthIn:[]};
+                for (let a = 0; a <= this.masAllYear[this.masYearIndex].thisYearIn.length;a++) {
+                    while(this.masAllYear[this.masYearIndex].thisYearIn[a]==undefined){
+                        this.masAllYear[this.masYearIndex].thisYearIn.push(masObg3);
+                        this.masAllYear[this.masYearIndex].thisYearIn[a].thisAllMonth=this.text5;
+                        this.monthMas=this.text5;
+                        this.toDo8(this.monthMas,this.yearMas)
+                        this.text5='';
+                        return this.masAllYear[this.masYearIndex].thisYearIn;
+                    }
+
+                    if(this.text5==this.masAllYear[this.masYearIndex].thisYearIn[a].thisAllMonth){
+                        alert('Такой месяц уже есть в списке')
+                        return this.masAllYear[this.masYearIndex].thisYearIn;
+                    }
+                }
+            },
+
+            toDo20: function(){
+                this.displayVisible9='none';
+            },
+
+            toDo21: function(value,index) {
+                this.masTasksInMonth=[];
+                for (let a = 0; a < this.masAllYear[this.masYearIndex].thisYearIn.length;a++) {
+                    if(this.masAllYear[this.masYearIndex].thisYearIn[a].thisAllMonth==value){
+                        for (let b = 0; b <= this.masAllYear[this.masYearIndex].thisYearIn[a].thisMonthIn.length;b++) {
+                            if(this.masAllYear[this.masYearIndex].thisYearIn[a].thisMonthIn.length==0){
+                                this.masTasksInMonth.push('Дат с планами на этот месяц нет');
+                                this.selected='';
+                                return this.masTasksInMonth;
+                            }
+                            else if(this.masAllYear[this.masYearIndex].thisYearIn[a].thisMonthIn[b].masTasks.length>0){
+                                this.masTasksInMonth.push('Дат '+this.masAllYear[this.masYearIndex].thisYearIn[a].thisMonthIn[b].arg+' имеет события подробней смотри в календаре')
+                            }
+                            else if(this.masAllYear[this.masYearIndex].thisYearIn[a].thisMonthIn[b].masTasks.length==0){
+                                this.masTasksInMonth.push('Дат с планами на этот месяц нет');
+                                this.selected='';
+                                return this.masTasksInMonth;
+                            }
+                        }
+                        return
+                    }
+                }
+            },
+
+            toDo22: function(value) {
+                this.monthMas=value;
+                this.toDo8(this.monthMas,this.yearMas);
+                return this.masAllYear[this.masYearIndex].thisYearIn;
+            },
+
+            skritPole: function(){
+                this.borderBottomRadius='10px';
+                this.displayVisible5='none';
+                this.displayVisible1='none';
+                this.displayVisible4='none';
+            },
+
+            skritPole1: function(){
+                for (let k = 0; k < this.masAllTasks.length; k++) {
+                    let thisTru;
+                    if(this.thisManthInSpisok1 == this.masAllTasks[k].arg){
+                        if(this.masAllTasks[k].masTasks.length == 0){
+                            this.displayVisible5='none';
+                            this.borderBottomRadius='10px';
+                            return
+                        }
+                        else if(this.masAllTasks[k].masTasks.length > 0){
+                            this.displayVisible5='block';
+                            this.borderBottomRadius='0px';
+                            return
+                        }
+                    }
+                }
+            },
+        },
+    });
+
+    let app3 = new Vue({
+        el: '#app3',
+        data: {
+            displayPole:'none',
+            displayTextarea:'none',
+            displayReSeive:'none',
+            divReSeiveText:'',
+            isValid:true,
+            message: '', // начальное значение в textarea
+            mas:[],
+            mas1:[],
+            masWeak:['Пн', 'Вт', 'Ср', 'Чт','Пт','Сб','Вс'],
+            buttonSeive:true,
+            buttonReSeive:false,
+            indexA:'',
+            comentToName:'',
+            zugolovo:'',
+
+        },
+        methods: {
+            seiveMessage: function(message) {
+                if(message=='' || message==' '){
+                    alert('Пустая заметка не может быть сохранена')
+                    return
+                }
+                let b={imy:'',title:''}
+                let a = new Date();
+                let c=a.getFullYear()+'-'+a.getMonth()+'-'+a.getDate()+'-'+this.masWeak[this.getDayFromWeak()]+' '+a.getHours()+':'+a.getMinutes()+':'+a.getSeconds()
+                b={imy:c,title:message}
+
+                this.mas.push(b)
+                this.mas1=[]
+                for(i=0;i<this.mas.length;i++){
+                    this.mas1.push(this.mas[i].imy)
+                }
+                this.message='';
+                if(this.mas1.length==0){
+                    this.zugolovo='Поле заметок пустое'
+                }
+                else if(this.mas1.length==1){
+                    this.zugolovo='Заметка'
+                }
+                else if(this.mas1.length>1){
+                    this.zugolovo='Заметки'
+                }
+                return
+            },
+
+            deleteMessage: function(index) {
+                this.buttonReSeive=false
+                this.buttonSeive=true
+               
+                this.mas.splice(index, 1)
+                this.mas1=[]
+            },
+
+            reSeiveMessage: function(message) {
+                debugger
+                if(message=='' || message==' '){
+                    alert('Пустая заметка не может быть сохранена')
+                    return
+                }
+                this.displayReSeive='block'
+                this.buttonReSeive=false
+                this.buttonSeive=true
+                let numbers=message.split('')
+                for(let i=0;i<numbers.length;){
+                    console.log(this.mas[this.indexA].title)
+                    if(this.mas[this.indexA].title.includes(numbers[i])===true || this.mas[this.indexA].title.includes(numbers[i].toUpperCase())===true || this.mas[this.indexA].title.includes(numbers[i].toLowerCase())===true){
+                        i++
+                    }
+                    else if(this.mas[this.indexA].title.includes(numbers[i])!==true || this.mas[this.indexA].title.includes(numbers[i].toUpperCase())!==true || this.mas[this.indexA].title.includes(numbers[i].toLowerCase())!==true){
+                        this.divReSeiveText=`Заметка была изменина!
+                        Сохранить запись как новую или пересохранить`
+                        this.comentToName='',
+                        this.comentToName='Изменено '
+                        return console.log('No')
+                    }
+                }
+                this.divReSeiveText=`Заметка не была изменина!
+                Сохранить запись как новую или пересохранить`
+                return console.log('Yse')
+            },
+
+            seive: function(message) {
+                if(message=='' || message==' '){
+                    alert('Пустая заметка не может быть сохранена')
+                    return
+                }
+                this.displayReSeive='none'
+                let b={imy:'',title:''}
+                let a = new Date();
+                let c=a.getFullYear()+'-'+a.getMonth()+'-'+a.getDate()+'-'+this.masWeak[this.getDayFromWeak()]+' '+a.getHours()+':'+a.getMinutes()+':'+a.getSeconds()
+                b={imy:c,title:message}
+
+                this.mas.push(b)
+                this.mas1=[]
+                for(i=0;i<this.mas.length;i++){
+                    this.mas1.push(this.mas[i].imy)
+                }
+                this.message='';
+                return
+            },
+
+            reseive: function(message) {
+                if(message=='' || message==' '){
+                    alert('Пустая заметка не может быть сохранена')
+                    return
+                }
+                this.displayReSeive='none'
+                let b={imy:'',title:''}
+                let a = new Date();
+                let c=this.comentToName+a.getFullYear()+'-'+a.getMonth()+'-'+a.getDate()+'-'+this.masWeak[this.getDayFromWeak()]+' '+a.getHours()+':'+a.getMinutes()+':'+a.getSeconds()
+                b={imy:c,title:message}
+                console.log(this.mas)
+                this.mas.splice(this.indexA, 1,b)
+                console.log(this.mas)
+                this.mas1=[]
+                for(i=0;i<this.mas.length;i++){
+                    this.mas1.push(this.mas[i].imy)
+                }
+                this.message='';
+                return
+            },
+
+            messageToTextarea: function(index){
+                this.indexA=''
+                this.indexA=index
+                this.buttonReSeive=true
+                this.buttonSeive=false
+                this.message=this.mas[index].title
+                return this.message
+            },
+            
+            getDayFromWeak: function(){
+                let a = new Date();
+                let b=a.getDay()
+                if(b==0){
+                    return b=6
+                }
+                else if(b>0){
+                    return b=b-1
+                }
+            },
+
+            oupeClose: function(){
+                if(this.isValid==true){
+                    this.isValid=false
+                    this.displayPole='flex';
+                    this.displayTextarea='block';
+                    if(this.mas1.length==0){
+                        this.zugolovo='Поле заметок пустое'
+                    }
+                    else if(this.mas1.length==1){
+                        this.zugolovo='Заметка'
+                    }
+                    else if(this.mas1.length>1){
+                        this.zugolovo='Заметки'
+                    }
+                    return
+                }
+                else if(this.isValid==false){
+                    this.isValid=true;
+                    this.displayPole='none';
+                    this.displayTextarea='none';
+                    if(this.mas1.length==0){
+                        this.zugolovo='Поле заметок пустое'
+                    }
+                    else if(this.mas1.length==1){
+                        this.zugolovo='Заметка'
+                    }
+                    else if(this.mas1.length>1){
+                        this.zugolovo='Заметки'
+                    }
+                    return
+                }
+            },
+
+            reLoad: function(index) {
+                this.buttonReSeive=false
+                this.buttonSeive=true
+                if(this.mas.length==0){
+                    this.zugolovo='Поле заметок пустое'
+                    return
+                }
+                else if (this.mas.length>=1){
+                    for(i=0;i<this.mas.length;i++){
+                        this.mas1.push(this.mas[i].imy)
+                    }
+                    if(this.mas1.length==0){
+                        this.zugolovo='Поле заметок пустое'
+                    }
+                    else if(this.mas1.length==1){
+                        this.zugolovo='Заметка'
+                    }
+                    else if(this.mas1.length>1){
+                        this.zugolovo='Заметки'
+                    }
+                    return
+                }
+            },
+        }
+    });
+
+    let app4 = new Vue({
+        el: '#app4',
+        data: {
+            displayPole:'none',
+            isValid:true,
+            isDisabled:false,
+            mas:[
+                {
+                    question: 'Вопрос 1',
+                    answer: 'Ответ 1'
+                },
+                {
+                    question: 'Вопрос 2',
+                    answer: 'Ответ 2'
+                },
+                {
+                    question: 'Вопрос 3',
+                    answer: 'Ответ 3'
+                },
+            ],
+            mas1:[],
+            masBorderColorInput:[],
+            masdisplaySpan:[],
+            masSpan:[],
+            masDisabled:[],
+        },
+        methods: {
+            addAnswer: function(index) {
+                if(this.mas1[index]=='' || this.mas1[index]==' '){
+                    alert('Ответ не может быть пустым')
+                    return
+                }
+                let numbers=this.mas1[index].split('')
+                for(let i=0;i<numbers.length;){
+                    if(this.mas[index].answer.includes(numbers[i])===true || this.mas[index].answer.includes(numbers[i].toUpperCase())===true || this.mas[index].answer.includes(numbers[i].toLowerCase())===true){
+                        i++
+                    }
+                    else if(this.mas[index].answer.includes(numbers[i])!==true || this.mas[index].answer.includes(numbers[i].toUpperCase())!==true || this.mas[index].answer.includes(numbers[i].toLowerCase())!==true){
+                        this.masBorderColorInput.splice(index, 1,'red')
+                        this.masdisplaySpan.splice(index, 1,'inline')
+                        this.masSpan.splice(index, 1,'Ответ не верный попытайся ещё =(')
+                        return console.log('No')
+                    }
+                }
+                this.masBorderColorInput.splice(index, 1,'#25ff00')
+                this.masdisplaySpan.splice(index, 1,'inline')
+                this.masSpan.splice(index, 1,'Ответ верный!Браво да ты ерудит)')
+                this.masDisabled.splice(index, 1,true)
+                return console.log('Yse')
+            },
+
+            oupeClose: function(){
+                this.mas1=[];
+                this.masBorderColorInput=[];
+                this.masdisplaySpan=[];
+                this.masSpan=[];
+                this.masDisabled=[];
+                for(let i=0;i<this.mas.length;i++){
+                    this.mas1.push('');
+                    this.masBorderColorInput.push('');
+                    this.masdisplaySpan.push('none');
+                    this.masSpan.push('');
+                    this.masDisabled.push(false);
+                }
+                if(this.isValid==true){
+                    this.isValid=false
+                    this.displayPole='flex';
+                    return
+                }
+                else if(this.isValid==false){
+                    this.isValid=true;
+                    this.displayPole='none';
+                    return
+                }
+            },
+        }
+    });
+
+    let app5 = new Vue({
+        el: '#app5',
+        data: {
+            displayPole:'none',
+            isValid:true,
+            type: '',
+            mas:[
+                {
+                    question: 'Вопрос 1',
+                    answers: [
+                        'Ответ 1',
+                        'Ответ 2',
+                        'Ответ 3',
+                        'Ответ 4',
+                        'Ответ 5',
+                    ],
+                    right: 3, // номер правильного ответа
+                },
+                {
+                    question: 'Вопрос 2',
+                    answers: [
+                        'Ответ 1',
+                        'Ответ 2',
+                        'Ответ 3',
+                        'Ответ 4',
+                        'Ответ 5',
+                    ],
+                    right: 1, // номер правильного ответа
+                },
+                {
+                    question: 'Вопрос 3',
+                    answers: [
+                        'Ответ 1',
+                        'Ответ 2',
+                        'Ответ 3',
+                        'Ответ 4',
+                        'Ответ 5',
+                    ],
+                    right: 5, // номер правильного ответа
+                },
+            ],
+            masColorP:[],
+            masRadio:[],
+            masRadioTrues:[],
+            index:'',
+        },
+        methods: {
+            addAnswer: function(value,index,indexMas,valueMas) {
+                this.index=''
+                if(value.includes(this.mas[indexMas].right)==true){
+                    this.index=indexMas;
+                    this.masColorP.splice(indexMas, 1,'#25ff00')
+                    this.masRadioTrues.splice(indexMas, 1,'Бинго!!! да ты настоящий гений ;)')
+                    return
+                }
+                else if(value.includes(this.mas[indexMas].right)!=true){
+                    this.index=indexMas
+                    this.masColorP.splice(indexMas, 1,'red')
+                    this.masRadioTrues.splice(indexMas, 1,'Ты меня огорчяешь ответ на '+valueMas.question+' не верный:(')
+                    return
+                }
+            },
+            
+            oupeClose: function(){
+                
+                if(this.isValid==true){
+                    this.type='';
+                    this.isValid=false
+                    this.displayPole='flex';
+                    this.masRadio=[];
+                    this.masColorP=[];
+                    this.masRadioTrues=[];
+                    for(let i=0;i<this.mas.length;){
+                        this.masRadio.push(this.mas[i].answers);
+                        this.masColorP.push('');
+                        this.masRadioTrues.push('');
+                        i++;
+                    }
+                    return
+                }
+                else if(this.isValid==false){
+                    this.isValid=true;
+                    this.displayPole='none';
+                    this.masRadio=[];
+                    this.masColorP=[];
+                    this.masRadioTrues=[];
+                    for(let i=0;i<this.mas.length;){
+                        this.masRadio.push(this.mas[i].answers);
+                        this.masColorP.push('');
+                        this.masRadioTrues.push('');
+                        i++;
+                    }
+                    return
+                }
+            },
+        }
+    });
+
+    let app6 = new Vue({
+        el: '#app6',
+        data: {
+            div1Visible:true,
+            div2Visible:false,
+            buttonNextTasks:true,
+            buttonResalt:false,
+            buttonDisplay:'none',
+            resalt:'Смотреть результат',
+            nextTasks:'Следующий вопрос',
+            preventTasks:'Предыдущиы вопрос',
+            displayPole:'none',
+            isValid:true, 
+            masAllTasks:[
+                {
+                    question:'Вопрос 1',
+                    answers: [
+                        'Ответ 1',
+                        'Ответ 2',
+                        'Ответ 3',
+                        'Ответ 4',
+                        'Ответ 5',
+                    ],
+                    right: [3], // номер правильного ответа
+                    masTasks:[],masDisplayInputCheckbox:[],masBackgroundColorP:[],masInputCheckbox:[]},
+
+                    {
+                    question:'Вопрос 2',
+                    answers: [
+                        'Ответ 1',
+                        'Ответ 2',
+                        'Ответ 3',
+                        'Ответ 4',
+                        'Ответ 5',
+                    ],
+                    right: [1,4], // номер правильного ответа
+                    masTasks:[],masDisplayInputCheckbox:[],masBackgroundColorP:[],masInputCheckbox:[]},
+
+                    {
+                    question:'Вопрос 3',
+                    answers: [
+                        'Ответ 1',
+                        'Ответ 2',
+                        'Ответ 3',
+                        'Ответ 4',
+                        'Ответ 5',
+                    ],
+                    right: [5], // номер правильного ответа
+                    masTasks:[],masDisplayInputCheckbox:[],masBackgroundColorP:[],masInputCheckbox:[]}
+                ],
+            index:0,
+            masResult:[],
+            masColorResult:[],
+        },
+        methods: {
+            addAnswer: function(value) {
+                for(i=0;i<this.masAllTasks[this.index].right.length;i++){
+                    if(value.includes(this.masAllTasks[this.index].right[i])===true){
+                        this.masAllTasks[this.index].masTasks.push(value)
+                    }
+                    else if(value.includes(this.masAllTasks[this.index].right[i])!==true){
+                        console.log('No')
+                    }
+                }
+                return
+            },
+            
+            oupeClose: function(){
+                if(this.isValid==true){
+                    this.isValid=false
+                    this.displayPole='flex'
+                    for(let i=0;i<this.masAllTasks.length;){
+                        for(let j=0;j<this.masAllTasks[i].answers.length;){
+                            this.masAllTasks[i].masDisplayInputCheckbox.push('inline-flex');
+                            this.masAllTasks[i].masInputCheckbox.push(false);
+                            j++
+                        }
+                        this.masColorResult.push('');
+                        i++;
+                    }
+                    return
+                }
+                else if(this.isValid==false){
+                    this.isValid=true;
+                    this.displayPole='none';
+                    this.buttonNextTasks=true;
+                    this.buttonResalt=false;
+                    this.div1Visible=true;
+                    this.div2Visible=false;
+                    this.index=0;
+                    this.masResult=[];
+                    this.masColorResult=[];
+                    this.buttonDisplay='none';
+                    for(let i=0;i<this.masAllTasks.length;){
+                        this.masAllTasks[i].masDisplayInputCheckbox=[];
+                        this.masAllTasks[i].masBackgroundColorP=[];
+                        this.masAllTasks[i].masInputCheckbox=[];
+                        this.masAllTasks[i].masTasks=[];
+                        i++;
+                    }
+                    return
+                }
+            },
+
+            nextTasksToDo: function(){
+                this.index=this.index+1
+                if(this.index>0){
+                    this.buttonDisplay='inline-flex'
+                }
+                if(this.index==2){
+                    this.buttonNextTasks=false
+                    this.buttonResalt=true
+                }
+                return
+            },
+
+            preventTasksToDo: function(){
+                this.index=this.index-1
+                if(this.index==0){
+                    this.buttonDisplay='none'
+                }
+                if(this.index<2){
+                    this.buttonNextTasks=true
+                    this.buttonResalt=false
+                }
+                return
+            },
+
+            seeResult: function(){
+                this.div1Visible=false;
+                this.div2Visible=true;
+                for(i=0;i<this.masAllTasks.length;){
+                    let addTrue='';
+                    let addFalse='';
+                    if(this.masAllTasks[i].right.length==this.masAllTasks[i].masTasks.length){
+                        for(j=0;j<this.masAllTasks[i].masInputCheckbox.length;j++){
+                            if(this.masAllTasks[i].masInputCheckbox[j]===true){
+                                addTrue++;
+                            }
+                            else if(this.masAllTasks[i].masInputCheckbox[j]===false){
+                                addFalse++;
+                            }
+                        }
+                        if(this.masAllTasks[i].right.length==addTrue){
+                            this.masResult.push('Отлично ответ на '+this.masAllTasks[i].question+' верный')
+                            this.masColorResult.splice(i, 1,'#25ff00')
+                        }
+                        else if(this.masAllTasks[i].right.length<addTrue+addFalse){
+                            this.masResult.push(this.masAllTasks[i].question+' ответ был близок но нет')
+                            this.masColorResult.splice(i, 1,'#607d8b')
+                        }
+                    }
+                    else if(this.masAllTasks[i].right.length<this.masAllTasks[i].masTasks.length){
+                        for(j=0;j<this.masAllTasks[i].masInputCheckbox.length;j++){
+                            if(this.masAllTasks[i].masInputCheckbox[j]===true){
+                                addTrue++;
+                            }
+                            else if(this.masAllTasks[i].masInputCheckbox[j]===false){
+                                addFalse++;
+                            }
+                        }
+                        if(this.masAllTasks[i].right.length==addTrue){
+                            this.masResult.push('Отлично ответ на '+this.masAllTasks[i].question+' верный')
+                            this.masColorResult.splice(i, 1,'#25ff00')
+                        }
+                        else if(this.masAllTasks[i].right.length<addTrue+addFalse){
+                            this.masResult.push(this.masAllTasks[i].question+' ответ был близок но нет')
+                            this.masColorResult.splice(i, 1,'#607d8b')
+                        }
+                    }
+                    else if(this.masAllTasks[i].masTasks.length==0){
+                        this.masResult.push(this.masAllTasks[i].question+' оказался не посильным это фиаско братан')
+                        this.masColorResult.splice(i, 1,'red')
+                    }
+                    else if(this.masAllTasks[i].masTasks.length>0 && this.masAllTasks[i].right.length!==this.masAllTasks[i].masTasks.length && this.masAllTasks[i].right.length>this.masAllTasks[i].masTasks.length){
+                        this.masResult.push('Ответ на '+this.masAllTasks[i].question+' не полон')
+                        this.masColorResult.splice(i, 1,'#ffbc00')
+                    }
+                    i++
+                }
+                return
+            },
+        }
+    });   
+   
+   </script>
+</html>
+
